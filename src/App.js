@@ -42,9 +42,9 @@ function App() {
       id: 'action',
       accessor:(item)=>{
         return <div>
-          <small style={{pointer:'cursor'}} onClick={()=>handleDelete(item._id)}>Delete</small>
+          <small style={{cursor:'pointer', color:'red'}} onClick={()=>handleDelete(item._id)}>Delete</small>
           <small> </small>
-          <small style={{pointer:'cursor'}} onClick={()=>getItem(item)}>Update</small>
+          <small style={{cursor:'pointer', color: 'green'}} onClick={()=>getItem(item)}>Update</small>
         </div>
       }
     },
@@ -64,11 +64,11 @@ function App() {
 
   useEffect(()=>{
     callMembers()
-  },[])
+  },[callMembers])
   
   useEffect(()=>{
     callMembers()
-  },[isChanged])
+  },[isChanged, callMembers])
 
   const handleChange = (e) => {
       const {target:{name,value}} = e
@@ -87,6 +87,7 @@ function App() {
         age:'',
         relationship:''
       })
+      await setIsUpdated(false)
     }
     catch(err){    }
   }
@@ -116,17 +117,28 @@ function App() {
     setMember(item)
     setIsUpdated(true)
   }
+  const handleAddButton = async() => {
+    await setIsUpdated(false)
+    await setMember({
+      name:'',
+      nickname:'',
+      age:'',
+      relationship:''
+    })
+  }
   return (
     <div>
       <Header/>
       <Container>
         <Row>
-          <Col>
+          <Col xs='12' sm='6'>
+            <h3 align='center'>Lists of Members</h3>
+            <Button onClick={handleAddButton}>Add Member</Button>
             <Table data={data} columns={columns}/>
           </Col>
-          <Col>
+          <Col xs='12' sm='6'>
             <Form onSubmit={isUpdated? handleUpdate: handleSubmit}>
-              <h1 align='center'>{isUpdated?'Update':'Add'} Family Member</h1>
+              <h3 align='center'>{isUpdated?'Update':'Add'} Family Member</h3>
               <FormGroup>
                 <Label>Name</Label>
                 <Input type='text' name='name' value={member.name} onChange={handleChange}/>
