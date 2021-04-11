@@ -1,15 +1,13 @@
 import React from 'react';
-import {Navbar,  NavbarBrand } from 'reactstrap'
+import { Layout } from 'antd'
 
 function Header() {
     return (
-        <header>
-        <Navbar color='dark' dark className='sticky-header'>
-          <NavbarBrand>
-            Family Tree
-          </NavbarBrand>
-        </Navbar>
-      </header>
+      <Layout.Header>
+        <nav>
+          <span style={{color:'#fff', fontSize: 18, fontWeight:500}}>Family Tree</span>
+        </nav>
+      </Layout.Header>
     );
 }
 
