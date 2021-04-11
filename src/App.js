@@ -54,7 +54,7 @@ function App() {
     async function getMembers(){
       try{
         const res = await API.getMembers()
-        setData(res)
+        setData(res.data)
         setIsChanged(false)
       }
       catch(err){}
@@ -95,7 +95,7 @@ function App() {
   const handleSubmit = async(e) => {
     e.preventDefault()
     try{
-      await API.createMembers(member)
+      await API.createMember(member)
       await setIsChanged(true)
       await setMember({
         name:'',

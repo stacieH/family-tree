@@ -1,34 +1,14 @@
-const url = 'http://localhost:3020'
-const headers = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-}
+import { get, post, remove, put } from './axiosServices'
 
 export const getMembers = () => {
-    return fetch(`${url}/members`)
-    .then(res=>res.json())
+    return get('members')
 }
-
-export const createMembers = (body) => {
-    return fetch(`${url}/members`,{
-        method: 'POST',
-        headers,
-        body:JSON.stringify(body)
-    })
-    .then(res=>res.json())
+export const createMember = (body) => {
+    return post('members', body)
 }
-
 export const deleteMember = (id) =>{
-    return fetch(`${url}/members/${id}`, {
-        method:'DELETE'
-    })
-    .then(res=>res.json())
+    return remove('members', id)
 }
 export const updateMember = (id, body) =>{
-    return fetch(`${url}/members/${id}`, {
-        method:'PUT',
-        headers,
-        body:JSON.stringify(body)
-    })
-    .then(res=>res.json())
+    return put('members', id, body)
 }
