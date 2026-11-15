@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = 'http://localhost:3020'
+const url = process.env.REACT_APP_URL || 'http://localhost:3020'
 
 export const get = (end_point) => {
     return axios.get(`${url}/${end_point}`)
