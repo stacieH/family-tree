@@ -1,4 +1,4 @@
-const url = 'http://localhost:3020'
+const url = process.env.REACT_APP_URL || 'http://localhost:3020'
 const headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
